@@ -1,11 +1,51 @@
-export const metadata = {
-  title: "Sign Up - Open PRO",
-  description: "Page description",
-};
+"use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  // Function to update state on input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        "https://api.shield-dev51.quest/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Process the response (e.g., extract JSON, handle success scenario)
+    } catch (error) {
+      // Handle any errors here
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
   return (
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -17,44 +57,23 @@ export default function SignUp() {
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
-            <div className="flex items-center my-6">
-              <div
-                className="border-t border-gray-700 border-dotted grow ml-3"
-                aria-hidden="true"
-              ></div>
-            </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label
                     className="block text-gray-300 text-sm font-medium mb-1"
-                    htmlFor="full-name"
+                    htmlFor="username"
                   >
-                    Full Name <span className="text-red-600">*</span>
+                    Username <span className="text-red-600">*</span>
                   </label>
                   <input
-                    id="full-name"
+                    id="username"
                     type="text"
                     className="form-input w-full text-gray-300"
-                    placeholder="First and last name"
+                    placeholder="Username"
                     required
-                  />
-                </div>
-              </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
-                  <label
-                    className="block text-gray-300 text-sm font-medium mb-1"
-                    htmlFor="company-name"
-                  >
-                    Company Name <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="company-name"
-                    type="text"
-                    className="form-input w-full text-gray-300"
-                    placeholder="Your company or app name"
-                    required
+                    onChange={handleChange}
+                    value={formData.username}
                   />
                 </div>
               </div>
@@ -64,14 +83,16 @@ export default function SignUp() {
                     className="block text-gray-300 text-sm font-medium mb-1"
                     htmlFor="email"
                   >
-                    Work Email <span className="text-red-600">*</span>
+                    Email <span className="text-red-600">*</span>
                   </label>
                   <input
                     id="email"
                     type="email"
                     className="form-input w-full text-gray-300"
-                    placeholder="you@yourcompany.com"
+                    placeholder="you@example.com"
                     required
+                    onChange={handleChange}
+                    value={formData.email}
                   />
                 </div>
               </div>
@@ -89,13 +110,17 @@ export default function SignUp() {
                     className="form-input w-full text-gray-300"
                     placeholder="Password (at least 10 characters)"
                     required
+                    onChange={handleChange}
+                    value={formData.password}
                   />
                 </div>
               </div>
-
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
-                  <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">
+                  <button
+                    className="btn text-white bg-purple-600 hover:bg-purple-700 w-full"
+                    type="submit"
+                  >
                     Sign up
                   </button>
                 </div>
