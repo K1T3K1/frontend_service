@@ -1,11 +1,54 @@
-export const metadata = {
-  title: "Sign In",
-  description: "Page description",
-};
+"use client";
 
+import React, { useState } from "react";
 import Link from "next/link";
 
 export default function SignIn() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const urlEncodedData = new URLSearchParams();
+    urlEncodedData.append("grant_type", "password");
+    urlEncodedData.append("username", formData.username);
+    urlEncodedData.append("password", formData.password);
+
+    try {
+      const response = await fetch(
+        "https://api.shield-dev51.quest/auth/token",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: urlEncodedData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      // Store the token in localStorage
+      localStorage.setItem("accessToken", data.access_token);
+      console.log(data.access_token, localStorage.getItem("accessToken"));
+
+      window.location.href = "/dashboard";
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      // Optionally update the state to show an error message to the user
+    }
+  };
+
   return (
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -17,21 +60,23 @@ export default function SignIn() {
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <label
                     className="block text-gray-300 text-sm font-medium mb-1"
-                    htmlFor="email"
+                    htmlFor="username"
                   >
-                    Email
+                    Username
                   </label>
                   <input
-                    id="email"
-                    type="email"
+                    id="username"
+                    type="text"
                     className="form-input w-full text-gray-300"
-                    placeholder="you@yourcompany.com"
+                    placeholder="Your username"
                     required
+                    onChange={handleChange}
+                    value={formData.username}
                   />
                 </div>
               </div>
@@ -49,6 +94,8 @@ export default function SignIn() {
                     className="form-input w-full text-gray-300"
                     placeholder="Password (at least 10 characters)"
                     required
+                    onChange={handleChange}
+                    value={formData.password}
                   />
                 </div>
               </div>
@@ -71,12 +118,12 @@ export default function SignIn() {
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mt-6">
-                <Link
-                  href="/dashboard"
+                <button
+                  type="submit"
                   className="btn-sm text-white bg-purple-600 hover:bg-purple-700 ml-3"
                 >
                   Sign in
-                </Link>
+                </button>
               </div>
             </form>
             <div className="text-gray-400 text-center mt-6">
