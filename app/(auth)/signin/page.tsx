@@ -99,7 +99,7 @@ export default function SignIn() {
                   />
                 </div>
               </div>
-              <div className="flex flex-wrap -mx-3 mb-4">
+              {/* <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
                   <div className="flex justify-between">
                     <label className="flex items-center">
@@ -116,7 +116,7 @@ export default function SignIn() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="flex flex-wrap -mx-3 mt-6">
                 <button
                   type="submit"
