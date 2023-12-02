@@ -1,22 +1,23 @@
-export const metadata = {
-  title: "Home - Open PRO",
-  description: "Page description",
-};
+"use client";
 
 import Hero from "@/components/hero";
 import Features from "@/components/features";
-import Newsletter from "@/components/newsletter";
-import Zigzag from "@/components/zigzag";
-import Testimonials from "@/components/testimonials";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("accessToken");
+
+      if (token) {
+        window.location.href = "/dashboard";
+      }
+    }
+  }, []);
   return (
     <>
       <Hero />
       <Features />
-      {/*<Zigzag />
-         <Testimonials />
-      <Newsletter />*/}
     </>
   );
 }
