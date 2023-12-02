@@ -40,7 +40,6 @@ export default function SignIn() {
       const data = await response.json();
       // Store the token in localStorage
       localStorage.setItem("accessToken", data.access_token);
-      console.log(data.access_token, localStorage.getItem("accessToken"));
 
       window.location.href = "/dashboard";
     } catch (error) {

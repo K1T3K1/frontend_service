@@ -20,7 +20,7 @@ export default function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await fetch(
+      let response = await fetch(
         "https://api.shield-dev51.quest/auth/register",
         {
           method: "POST",
@@ -38,6 +38,31 @@ export default function SignUp() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
+      // Prepare data for token request
+      const urlEncodedData = new URLSearchParams();
+      urlEncodedData.append("grant_type", "password");
+      urlEncodedData.append("username", formData.username);
+      urlEncodedData.append("password", formData.password);
+
+      // Send token request
+      response = await fetch("https://api.shield-dev51.quest/auth/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: urlEncodedData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Token request failed");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("accessToken", data.access_token);
+
+      // Redirect to dashboard
+      window.location.href = "/dashboard";
 
       // Process the response (e.g., extract JSON, handle success scenario)
     } catch (error) {
