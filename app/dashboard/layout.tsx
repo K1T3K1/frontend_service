@@ -1,36 +1,33 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-import PageIllustration from '@/components/page-illustration'
+import PageIllustration from "@/components/page-illustration";
 
 export default function DefaultLayout({
-                                        children,
-                                      }: {
-  children: React.ReactNode
+  children,
+}: {
+  children: React.ReactNode;
 }) {
-
   useEffect(() => {
     AOS.init({
       once: true,
-      disable: 'phone',
+      disable: "phone",
       duration: 600,
-      easing: 'ease-out-sine',
-    })
-  })
+      easing: "ease-out-sine",
+    });
+  });
 
   return (
-      <>
-        <main className="grow">
+    <>
+      <main className="grow">
+        <PageIllustration />
 
-          <PageIllustration />
-
-          {children}
-
-        </main>
-      </>
-  )
+        {children}
+      </main>
+    </>
+  );
 }

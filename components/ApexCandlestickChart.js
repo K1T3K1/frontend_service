@@ -1,10 +1,12 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import jsonData from "app/dashboard/candlestickdata.json";
 
-const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 class ApexCandlestickChart extends React.Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class ApexCandlestickChart extends React.Component {
     this.state = {
       series: [
         {
-            data: this.parseData(jsonData),
+          data: this.parseData(jsonData),
         },
       ],
       options: {
@@ -21,7 +23,7 @@ class ApexCandlestickChart extends React.Component {
           type: "candlestick",
           height: 350,
           autoWidth: true,
-          background: '#fff',
+          background: "#fff",
         },
         title: {
           text: "CandleStick Chart",
@@ -57,15 +59,15 @@ class ApexCandlestickChart extends React.Component {
 
   render() {
     return (
-        <div id="candlestickChart">
-          <ReactApexChart
-              options={this.state.options}
-              series={this.state.series}
-              type="candlestick"
-              height={800}
-              width={1500}
-          />
-        </div>
+      <div id="candlestickChart">
+        <ReactApexChart
+          options={this.state.options}
+          series={this.state.series}
+          type="candlestick"
+          height={800}
+          width={1500}
+        />
+      </div>
     );
   }
 }

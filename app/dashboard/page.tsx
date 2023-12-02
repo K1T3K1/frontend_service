@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 import ApexCandlestickChart from "@/components/ApexCandlestickChart";
 
 interface DashboardProps {}
 
 const Dashboard: React.FC<DashboardProps> = () => {
-    return (
-        <>
-            <ApexCandlestickChart />
-        </>
-    );
+  return (
+    <>
+      <ApexCandlestickChart />
+    </>
+  );
 };
 
 export default Dashboard;
