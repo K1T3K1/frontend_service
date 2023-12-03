@@ -10,6 +10,8 @@ export default function SignUp() {
     password: "",
   });
 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
   // Function to update state on input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -61,8 +63,11 @@ export default function SignUp() {
       const data = await response.json();
       localStorage.setItem("accessToken", data.access_token);
 
+      setShowSuccessMessage(true);
       // Redirect to dashboard
-      window.location.href = "/dashboard";
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 2000);
 
       // Process the response (e.g., extract JSON, handle success scenario)
     } catch (error) {
@@ -82,6 +87,11 @@ export default function SignUp() {
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
+            {showSuccessMessage && (
+                <div className="text-green-500 text-center mb-4">
+                  Account created successfully! Redirecting to dashboard...
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">

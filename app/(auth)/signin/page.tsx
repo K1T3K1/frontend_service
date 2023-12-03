@@ -9,6 +9,9 @@ export default function SignIn() {
     password: "",
   });
 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -41,7 +44,11 @@ export default function SignIn() {
       // Store the token in localStorage
       localStorage.setItem("accessToken", data.access_token);
 
-      window.location.href = "/dashboard";
+      setShowSuccessMessage(true);
+      // Redirect to dashboard
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
       // Optionally update the state to show an error message to the user
@@ -59,6 +66,11 @@ export default function SignIn() {
 
           {/* Form */}
           <div className="max-w-sm mx-auto">
+            {showSuccessMessage && (
+                <div className="text-green-500 text-center mb-4">
+                  Logged in successfully! Redirecting to dashboard...
+                </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-4">
                 <div className="w-full px-3">
@@ -98,24 +110,7 @@ export default function SignIn() {
                   />
                 </div>
               </div>
-              {/* <div className="flex flex-wrap -mx-3 mb-4">
-                <div className="w-full px-3">
-                  <div className="flex justify-between">
-                    <label className="flex items-center">
-                      <input type="checkbox" className="form-checkbox" />
-                      <span className="text-gray-400 ml-2">
-                        Keep me signed in
-                      </span>
-                    </label>
-                    <Link
-                      href="/reset-password"
-                      className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
-                    >
-                      Forgot Password?
-                    </Link>
-                  </div>
-                </div>
-              </div> */}
+
               <div className="flex flex-wrap -mx-3 mt-6">
                 <button
                   type="submit"
