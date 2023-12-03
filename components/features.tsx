@@ -5,10 +5,12 @@ export default function Features() {
         <div className="py-12 md:py-20">
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4">Add website description if you want</h2>
+            <h2 className="h2 mb-4">Welcome to our stock market platform</h2>
             <p className="text-xl text-gray-400">
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
+              At TradeBalance, we bring you the future of trading, combining advanced technology with a
+              user-friendly interface. As a part of our comprehensive financial ecosystem, we seamlessly integrate data
+              fetching and database management through our powerful ETL service. Our dedicated backend ensures a secure
+              and smooth client experience, handling account creation, managing stock portfolios, and facilitating transactions.
             </p>
           </div>
 
@@ -49,11 +51,10 @@ export default function Features() {
                   strokeWidth="2"
                 />
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">Data-Driven Insights:</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Stay ahead of market trends with our data-driven insights, providing real-time intelligence for
+                well-informed investment choices.
               </p>
             </div>
 
@@ -90,11 +91,10 @@ export default function Features() {
                   strokeLinecap="square"
                 />
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">Advanced Analytics:</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Unlock in-depth analytics tools for comprehensive market analysis, enabling you to identify potential
+                investment opportunities with precision.
               </p>
             </div>
 
@@ -142,11 +142,10 @@ export default function Features() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">Automated ETL Processes:</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Our behind-the-scenes data processing ensures that you have access to the latest market data, offering
+                a competitive edge in the dynamic world of stock trading.
               </p>
             </div>
 
@@ -187,11 +186,10 @@ export default function Features() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">Data Intelligence: </h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Our data-driven approach provides real-time market insights, empowering you with the
+                information needed to make informed investment decisions.
               </p>
             </div>
 
@@ -229,11 +227,10 @@ export default function Features() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">User-Friendly Interface:</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                Navigate our intuitive interface effortlessly, making stock trading and portfolio management accessible
+                to users of all experience levels.
               </p>
             </div>
 
@@ -278,11 +275,10 @@ export default function Features() {
                   />
                 </g>
               </svg>
-              <h4 className="h4 mb-2">Instant Features</h4>
+              <h4 className="h4 mb-2">Personalized Portfolios:</h4>
               <p className="text-lg text-gray-400 text-center">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat.
+                 Leverage our state-of-the-art portfolio analysis tools to tailor your investment strategy according to
+                your financial goals.
               </p>
             </div>
           </div>

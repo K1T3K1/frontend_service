@@ -21,9 +21,11 @@ export default function Footer() {
                 */}
               </div>
               <div className="text-gray-400">
+                {/*
                 Lorem ipsum is placeholder text commonly used in the graphic,
                 print, and publishing industries for previewing layouts and
                 visual mockups.
+                */}
               </div>
             </div>
           </div>
