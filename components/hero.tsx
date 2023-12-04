@@ -54,7 +54,7 @@ export default function Hero() {
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              Bussines app for bussines men
+              Business app for business men
             </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"></div>
           </div>
