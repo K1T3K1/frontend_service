@@ -56,18 +56,20 @@ class ApexCandlestickChart extends React.Component {
       y: [entry.OpenPrice, entry.HighPrice, entry.LowPrice, entry.ClosePrice],
     }));
   }
-
+ // absolute left-0 bottom-0 -ml-20 hidden lg:block pointer-events-none
   render() {
     return (
-      <div id="candlestickChart">
-        <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
-          type="candlestick"
-          height={800}
-          width={1500}
-        />
-      </div>
+        <div id="candlestickChart">
+          <div className="max-w-screen-2xl mx-auto mt-20  ">
+            <ReactApexChart
+                options={this.state.options}
+                series={this.state.series}
+                type="candlestick"
+                height={800}
+                width={1500}
+            />
+          </div>
+        </div>
     );
   }
 }

@@ -6,10 +6,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import PageIllustration from "@/components/page-illustration";
+import Header from "@/components/ui/header";
+import DashboardHeader from "@/components/ui/dashboardheader";
 
 export default function DefaultLayout({
-  children,
-}: {
+                                        children,
+                                      }: {
   children: React.ReactNode;
 }) {
   useEffect(() => {
@@ -22,12 +24,12 @@ export default function DefaultLayout({
   });
 
   return (
-    <>
-      <main className="grow">
-        <PageIllustration />
-
-        {children}
-      </main>
-    </>
+      <>
+        <main className="grow">
+          <PageIllustration />
+          <DashboardHeader />
+          {children}
+        </main>
+      </>
   );
 }
