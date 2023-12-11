@@ -110,11 +110,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
                 onChange={handleChange}
                 className="block w-full border border-black-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               >
-                <option value="type1">Typ 1</option>
+                <option value="buy">Kupno</option>
                 <option value="" disabled selected hidden>
                   Wybierz typ
                 </option>
-                <option value="type2">Typ 2</option>
+                <option value="sell">Sprzedaż</option>
               </select>
             </div>
             <div className="w-full px-3 mb-6">
