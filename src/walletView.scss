@@ -1,0 +1,31 @@
+.walletView {
+    display: flex;
+    flex-direction: row-revere;
+}
+
+.box {
+    max-width: 400px;
+    min-width: 300px;
+    padding: 40px;
+    background: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
+    border-radius: 25px;
+}
+
+.box h2 {
+    color: #fff;
+}
+
+.box form label {
+    color: #fff
+}
+
+.transactionForm {
+    @extend .box;
+    margin-right: 16rem;
+}
+
+.transactionList {
+    @extend .box
+}

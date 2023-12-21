@@ -1,0 +1,47 @@
+.navigationBar {
+    width: 80%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    border-radius:25px;
+  }
+  
+  .navigationBar .navButtons a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+
+  .navigationBar .navButtons div a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .navigationBar a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navigationBar .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navigationBar .navButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
