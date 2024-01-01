@@ -18,26 +18,42 @@ class ApexCandlestickChart extends React.Component {
           data: this.parseData(jsonData),
         },
       ],
+
+
       options: {
+
+
         chart: {
           type: "candlestick",
           height: 350,
           autoWidth: true,
-          background: "#fff",
+          background: "dark",
         },
         title: {
+          style: {
+            color: "#fff",
+          },
           text: "CandleStick Chart",
           align: "left",
         },
         tooltip: {
           enabled: true,
         },
+
         xaxis: {
+          labels: {
+            style: {
+              colors: "#fff",
+            },
+          },
           type: "datetime",
         },
         yaxis: {
-          // Set precision to two decimal places
+
           labels: {
+            style: {
+              colors: "#fff",
+            },
             formatter: function (value) {
               return value.toFixed(2);
             },
@@ -56,7 +72,7 @@ class ApexCandlestickChart extends React.Component {
       y: [entry.OpenPrice, entry.HighPrice, entry.LowPrice, entry.ClosePrice],
     }));
   }
- // absolute left-0 bottom-0 -ml-20 hidden lg:block pointer-events-none
+
   render() {
     return (
         <div id="candlestickChart">

@@ -17,12 +17,27 @@ export default function DashboardHeader() {
                         {/* Desktop sign-in links */}
                         <ul className="flex grow justify-end flex-wrap items-center">
                             <li>
-                                {/* Temporary */}
                                 <Link
                                     href="/dashboard"
                                     className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
                                 >
-                                    Settings
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/transactions/add"
+                                    className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                                >
+                                    Add a transaction
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/transactions/list"
+                                    className="font-medium text-purple-600 hover:text-gray-200 px-4 py-3 flex items-center transition duration-150 ease-in-out"
+                                >
+                                    Show transactions
                                 </Link>
                             </li>
                             <li>
