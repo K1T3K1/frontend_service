@@ -127,6 +127,14 @@ export default function SignIn() {
                 className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
               >
                 Sign up
+              </Link>{" "}
+              <br />
+              Forgot your password?{" "}
+              <Link
+                href="/reset-password"
+                className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out"
+              >
+                Reset it!
               </Link>
             </div>
           </div>
