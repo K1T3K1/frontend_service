@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./TransactionList.module.css";
+import EditTransactionForm from "@/components/EditTransactionForm";
 
 const TransactionList = () => {
     const [transactions, setTransactions] = useState([]);
+    const [editingTransaction, setEditingTransaction] = useState(null);
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -55,7 +57,7 @@ const TransactionList = () => {
 
             // Delete user transaction
             const response = await fetch(
-                "https://api.shield-dev51.quest/user/transactions",
+                "https://api.shield-dev51.quest/user/transaction",
                 {
                     method: "DELETE",
                     headers: {
@@ -79,6 +81,57 @@ const TransactionList = () => {
         }
     };
 
+    const handleEditClick = (id) => {
+        setEditingTransaction(transactions.find(transaction => transaction.id === id));
+
+    }
+
+    const handleCancelClick = () => {
+        setEditingTransaction(null);
+    }
+
+    const handleUpdateTransaction = async (updatedTransaction) => {
+        try {
+            // Retrieve the access token from local storage
+            const accessToken = localStorage.getItem("accessToken");
+
+            // Check if the access token is available
+            if (!accessToken) {
+                throw new Error("Access token is not available");
+            }
+
+            // Update user transaction
+            const response = await fetch(
+                "https://api.shield-dev51.quest/user/transaction",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Include the authorization header
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify(updatedTransaction),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            // Update UI after successful update
+            setTransactions(transactions.map(transaction => {
+                if (transaction.id === updatedTransaction.id) {
+                    return updatedTransaction;
+                }
+                return transaction;
+            }));
+            setEditingTransaction(null);
+        } catch (error) {
+            // Handle errors here
+            console.error("There was a problem with the fetch operation:", error);
+        }
+    }
+
     return (
         <div className={styles.transactionList}>
             <h2>User Transactions</h2>
@@ -92,7 +145,7 @@ const TransactionList = () => {
                         <th>Transaction Date</th>
                         <th>Transaction Type</th>
                         <th>Company ID</th>
-                        <th>Delete</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,6 +161,9 @@ const TransactionList = () => {
                                 <button onClick={() => handleDelete(transaction.id)} className="btn-sm text-white bg-red-500 hover:bg-red-600">
                                     Delete
                                 </button>
+                                <button onClick={() => handleEditClick(transaction.id)} className="btn-sm text-white bg-blue-500 hover:bg-blue-600">
+                                    Edit
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -116,6 +172,17 @@ const TransactionList = () => {
             ) : (
                 <p>No transactions available.</p>
             )}
+            {editingTransaction && (
+                <EditTransactionForm
+                    key={editingTransaction.id}
+                    transaction={editingTransaction}
+                    onCancelClick={handleCancelClick}
+                    onUpdateTransaction={handleUpdateTransaction}
+                />
+            )
+
+            }
+
         </div>
     );
 };
