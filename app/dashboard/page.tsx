@@ -1,5 +1,3 @@
-// dashboard/page.tsx
-
 "use client";
 import React from "react";
 import ApexCandlestickChart from "@/components/ApexCandlestickChart";
@@ -10,9 +8,17 @@ interface DashboardProps {}
 const Dashboard: React.FC<DashboardProps> = () => {
   useRequireAuth();
 
+
+    {/*
+    Waiting for backend to finish the get all companies endpoint
+    */}
+
   return (
       <>
-        <ApexCandlestickChart />
+        <ApexCandlestickChart
+            company_symbol={"AAPL"}
+            range={"1y"}
+        />
       </>
   );
 };
