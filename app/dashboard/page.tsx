@@ -1,26 +1,26 @@
 "use client";
-import React from "react";
+
+import React, { useState } from "react";
 import ApexCandlestickChart from "@/components/ApexCandlestickChart";
+import ChartFilter from "@/components/ChartFilter";
 import { useRequireAuth } from "@/utils/useRequireAuth";
 
 interface DashboardProps {}
 
 const Dashboard: React.FC<DashboardProps> = () => {
-  useRequireAuth();
+    useRequireAuth();
+    const [filter, setFilter] = useState({ company_symbol: "AAPL", range: "7d" });
 
+    const handleFilterChange = (company_symbol, range) => {
+        setFilter({ company_symbol, range });
+    };
 
-    {/*
-    Waiting for backend to finish the get all companies endpoint
-    */}
-
-  return (
-      <>
-        <ApexCandlestickChart
-            company_symbol={"AAPL"}
-            range={"1y"}
-        />
-      </>
-  );
+    return (
+        <>
+            <ChartFilter onFilterChange={handleFilterChange} />
+            <ApexCandlestickChart {...filter} />
+        </>
+    );
 };
 
 export default Dashboard;
