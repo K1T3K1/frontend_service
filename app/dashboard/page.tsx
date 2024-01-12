@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import ApexCandlestickChart from "@/components/ApexCandlestickChart";
 import ChartFilter from "@/components/ChartFilter";
+import Portfolio from "@/components/Portfolio";
 import { useRequireAuth } from "@/utils/useRequireAuth";
 
 interface DashboardProps {}
@@ -20,6 +21,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
       <div className="header-with-lines mb-10">
         <h1 className="text-4xl font-bold">Dashboard</h1>
       </div>
+        <Portfolio />
       <ChartFilter onFilterChange={handleFilterChange} />
       <ApexCandlestickChart {...filter} />
     </div>

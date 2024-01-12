@@ -18,6 +18,10 @@ const SimulatorForm = ({ onSimulate }) => {
         }
         const data = await response.json();
         setCompanies(data.companies);
+
+        // set selected company to the first company in the list
+        setSelectedCompany(data.companies[0].symbol);
+
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
       }
@@ -35,6 +39,10 @@ const SimulatorForm = ({ onSimulate }) => {
   };
 
   const handleAddInvestment = () => {
+
+    // print the selected company and investment volume
+    console.log(selectedCompany, investmentVolume);
+
     if (selectedCompany && investmentVolume) {
       setInvestmentsList([
         ...investmentsList,
@@ -44,8 +52,7 @@ const SimulatorForm = ({ onSimulate }) => {
         },
       ]);
 
-      // Clear the selected company and investment volume
-      setSelectedCompany("");
+      // reset the form
       setInvestmentVolume("");
     }
   };
