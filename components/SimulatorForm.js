@@ -103,20 +103,20 @@ const SimulatorForm = ({ onSimulate }) => {
       </div>
 
       {investmentsList.length > 0 && (
-        <div class="mt-6">
+        <div className="mt-6">
           <label className="block text-lg font-semibold text-gray-400 mb-1">
             Simulation Results
           </label>
-          <table class="table-auto  border-collapse border border-gray-300">
-            <thead class="bg-gray-200">
+          <table className="table-auto  border-collapse border border-gray-300">
+            <thead className="bg-gray-200">
               <tr>
-                <th class="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
+                <th className="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
                   Company
                 </th>
-                <th class="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
+                <th className="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
                   Value
                 </th>
-                <th class="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
+                <th className="border border-gray-300 px-4 py-2 text-gray-600 font-semibold">
                   Action
                 </th>
               </tr>
@@ -124,16 +124,16 @@ const SimulatorForm = ({ onSimulate }) => {
             <tbody>
               {investmentsList.map((investment, index) => (
                 <tr key={index}>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td className="border border-gray-300 px-4 py-2">
                     {investment.company_symbol}
                   </td>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td className="border border-gray-300 px-4 py-2">
                     {investment.investment_volume}
                   </td>
-                  <td class="border border-gray-300 px-4 py-2">
+                  <td className="border border-gray-300 px-4 py-2">
                     <button
                       onClick={() => handleRemoveInvestment(index)}
-                      class="text-red-500 hover:text-red-600 font-bold py-2 px-4"
+                      className="text-red-500 hover:text-red-600 font-bold py-2 px-4"
                     >
                       Remove
                     </button>

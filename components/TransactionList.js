@@ -145,7 +145,7 @@ const TransactionList = () => {
   };
 
   return (
-    <div class="mb-10 mt-20">
+    <div className="mb-10 mt-20">
       <div className="header-with-lines">
         <h1 className="text-4xl font-bold">Transactions</h1>
       </div>
