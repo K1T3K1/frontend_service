@@ -14,7 +14,7 @@ const ApexCandlestickChart = ({ company_symbol, range }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-            `https://api.shield-dev51.quest/company/chart/candlestick?company=${company_symbol}&range=${range}`
+          `https://api.shield-dev51.quest/company/chart/candlestick?company=${company_symbol}&range=${range}`
         );
 
         if (!response.ok) {
@@ -81,17 +81,17 @@ const ApexCandlestickChart = ({ company_symbol, range }) => {
   };
 
   return (
-      <div id="candlestickChart">
-        <div className="max-w-screen-2xl mx-auto mt-20">
-          <ReactApexChart
-              options={options}
-              series={seriesData}
-              type="candlestick"
-              height={800}
-              width={1500}
-          />
-        </div>
+    <div id="candlestickChart">
+      <div className="max-w-screen-2xl mx-auto mt-10">
+        <ReactApexChart
+          options={options}
+          series={seriesData}
+          type="candlestick"
+          height={800}
+          width={1500}
+        />
       </div>
+    </div>
   );
 };
 

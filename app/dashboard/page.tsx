@@ -8,19 +8,22 @@ import { useRequireAuth } from "@/utils/useRequireAuth";
 interface DashboardProps {}
 
 const Dashboard: React.FC<DashboardProps> = () => {
-    useRequireAuth();
-    const [filter, setFilter] = useState({ company_symbol: "AAPL", range: "7d" });
+  useRequireAuth();
+  const [filter, setFilter] = useState({ company_symbol: "AAPL", range: "7d" });
 
-    const handleFilterChange = (company_symbol, range) => {
-        setFilter({ company_symbol, range });
-    };
+  const handleFilterChange = (company_symbol, range) => {
+    setFilter({ company_symbol, range });
+  };
 
-    return (
-        <>
-            <ChartFilter onFilterChange={handleFilterChange} />
-            <ApexCandlestickChart {...filter} />
-        </>
-    );
+  return (
+    <div className="mt-20">
+      <div className="header-with-lines mb-10">
+        <h1 className="text-4xl font-bold">Dashboard</h1>
+      </div>
+      <ChartFilter onFilterChange={handleFilterChange} />
+      <ApexCandlestickChart {...filter} />
+    </div>
+  );
 };
 
 export default Dashboard;
