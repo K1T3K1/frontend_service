@@ -133,7 +133,7 @@ const SimulatorForm = ({ onSimulate }) => {
                   <td class="border border-gray-300 px-4 py-2">
                     <button
                       onClick={() => handleRemoveInvestment(index)}
-                      class="text-red-500 hover:text-red-600 font-bold py-2 px-4 rounded"
+                      class="text-red-500 hover:text-red-600 font-bold py-2 px-4"
                     >
                       Remove
                     </button>

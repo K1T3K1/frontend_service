@@ -1,26 +1,27 @@
 .transactionList {
-    margin-top: 60px;
+  margin-top: 60px;
+  padding: 0 20px;
 }
 
 .transactionTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
 .transactionTable th,
 .transactionTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
 .transactionTable th {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .transactionTable thead tr th {
-    position: sticky;
-    top: 0;
-    background-color: darkgray;
+  position: sticky;
+  top: 0;
+  background-color: darkgray;
 }
