@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import styles from "./TransactionList.module.css";
 import { Dialog, Transition } from "@headlessui/react";
+import { toast } from "react-toastify";
 import TransactionForm from "./TransactionForm";
 
 const TransactionList = () => {
@@ -81,6 +82,8 @@ const TransactionList = () => {
       setTransactions(
         transactions.filter((transaction) => transaction.id !== id)
       );
+
+      toast.success("Transaction successfully deleted");
     } catch (error) {
       // Handle errors here
       console.error("There was a problem with the fetch operation:", error);

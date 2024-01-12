@@ -103,10 +103,7 @@ export default function SignUp() {
         window.location.href = "/dashboard";
       }, 2000);
     } catch (error) {
-      toast.error("Something went wrong on registration", {
-        position: "bottom-right",
-        theme: "dark",
-      });
+      toast.error("Something went wrong on registration");
       console.error("There was a problem with the fetch operation:", error);
     }
   };
