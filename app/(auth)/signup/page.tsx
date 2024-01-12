@@ -1,7 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+
+function isEmailValid(email) {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailRegex.test(email);
+}
+
+function getErrors(formData) {
+  return {
+    short_username: formData.username.length < 4,
+    short_password: formData.password.length < 8,
+    invalid_email: !isEmailValid(formData.email),
+  };
+}
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -9,17 +23,40 @@ export default function SignUp() {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({
+    short_username: false,
+    short_password: false,
+    invalid_email: false,
+  });
+  const [isFailedOnFirstSubmit, setIsFailedOnFirstSubmit] = useState(false);
+  const isEmptyForm = Object.values(formData).some((field) => field === "");
 
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Function to update state on input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  // Function to handle form submission
+  useEffect(() => {
+    if (isFailedOnFirstSubmit) {
+      setErrors((prevState) => ({
+        ...prevState,
+        ...getErrors(formData),
+      }));
+    }
+  }, [formData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const newErrors = getErrors(formData);
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((error) => error);
+    if (hasErrors) {
+      setIsFailedOnFirstSubmit(true);
+      return;
+    }
 
     try {
       let response = await fetch(
@@ -41,13 +78,11 @@ export default function SignUp() {
         throw new Error("Network response was not ok");
       }
 
-      // Prepare data for token request
       const urlEncodedData = new URLSearchParams();
       urlEncodedData.append("grant_type", "password");
       urlEncodedData.append("username", formData.username);
       urlEncodedData.append("password", formData.password);
 
-      // Send token request
       response = await fetch("https://api.shield-dev51.quest/auth/token", {
         method: "POST",
         headers: {
@@ -64,14 +99,14 @@ export default function SignUp() {
       localStorage.setItem("accessToken", data.access_token);
 
       setShowSuccessMessage(true);
-      // Redirect to dashboard
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 2000);
-
-      // Process the response (e.g., extract JSON, handle success scenario)
     } catch (error) {
-      // Handle any errors here
+      toast.error("Something went wrong on registration", {
+        position: "bottom-right",
+        theme: "dark",
+      });
       console.error("There was a problem with the fetch operation:", error);
     }
   };
@@ -80,17 +115,15 @@ export default function SignUp() {
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-          {/* Page header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h1 className="h1">Create account</h1>
           </div>
 
-          {/* Form */}
           <div className="max-w-sm mx-auto">
             {showSuccessMessage && (
-                <div className="text-green-500 text-center mb-4">
-                  Account created successfully! Redirecting to dashboard...
-                </div>
+              <div className="text-green-500 text-center mb-4">
+                Account created successfully! Redirecting to dashboard...
+              </div>
             )}
             <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap -mx-3 mb-4">
@@ -110,6 +143,11 @@ export default function SignUp() {
                     onChange={handleChange}
                     value={formData.username}
                   />
+                  {errors.short_username && (
+                    <div className="text-red-500 text-center">
+                      Username must be at leat 4 characters
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
@@ -122,13 +160,18 @@ export default function SignUp() {
                   </label>
                   <input
                     id="email"
-                    type="email"
+                    type="text"
                     className="form-input w-full text-gray-300"
                     placeholder="you@example.com"
                     required
                     onChange={handleChange}
                     value={formData.email}
                   />
+                  {errors.invalid_email && (
+                    <div className="text-red-500 text-center">
+                      Email is invalid
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mb-4">
@@ -143,18 +186,28 @@ export default function SignUp() {
                     id="password"
                     type="password"
                     className="form-input w-full text-gray-300"
-                    placeholder="Password (at least 10 characters)"
+                    placeholder="Password (at least 8 characters)"
                     required
                     onChange={handleChange}
                     value={formData.password}
                   />
+                  {errors.short_password && (
+                    <div className="text-red-500 text-center">
+                      Password must be at leat 8 characters
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-wrap -mx-3 mt-6">
                 <div className="w-full px-3">
                   <button
-                    className="btn text-white bg-purple-600 hover:bg-purple-700 w-full"
+                    className="btn text-white bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 w-full"
                     type="submit"
+                    disabled={
+                      isEmptyForm ||
+                      (isFailedOnFirstSubmit &&
+                        Object.values(errors).some((error) => error))
+                    }
                   >
                     Sign up
                   </button>
@@ -173,6 +226,7 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </section>
   );
 }
