@@ -29,16 +29,16 @@ const SimulatorResultTable = ({ result }) => {
         <tbody>
           <tr>
             <td className="border border-gray-300 px-4 py-2">
-              {result.roi.toFixed(3)}
+              {result.roi.toFixed(4)}%
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {result.stddev.toFixed(3)}
+              {result.stddev.toFixed(4)}
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {result.interval.map((value) => value.toFixed(3)).join(" - ")}
+              {result.interval.map((value) => value.toFixed(4)).join("% - ")}%
             </td>
             <td className="border border-gray-300 px-4 py-2">
-              {result.sharpe.toFixed(3)}
+              {result.sharpe.toFixed(4)}
             </td>
             <td className="border border-gray-300 px-4 py-2">
               {result.recommendation}
