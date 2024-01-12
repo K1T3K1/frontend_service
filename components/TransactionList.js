@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import styles from "./TransactionList.module.css";
-import EditTransactionForm from "@/components/EditTransactionForm";
 import { Dialog, Transition } from "@headlessui/react";
 import TransactionForm from "./TransactionForm";
 
@@ -193,14 +192,6 @@ const TransactionList = () => {
         ) : (
           <p>No transactions available.</p>
         )}
-        {editingTransaction && (
-          <EditTransactionForm
-            key={editingTransaction.id}
-            transaction={editingTransaction}
-            onCancelClick={handleCancelClick}
-            onUpdateTransaction={handleUpdateTransaction}
-          />
-        )}
       </div>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -233,6 +224,15 @@ const TransactionList = () => {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <header className="bg-gray-200 px-6 py-4 rounded-t-lg flex justify-center items-center">
+                    <Dialog.Title
+                      as="h3"
+                      className="text-lg leading-6 font-medium text-gray-900"
+                    >
+                      Edit Transaction
+                    </Dialog.Title>
+                  </header>
+
                   <TransactionForm
                     initialState={editingTransaction}
                     handleSubmit={handleUpdateTransaction}

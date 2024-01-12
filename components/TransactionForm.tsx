@@ -63,8 +63,8 @@ const TransactionForm = (props) => {
   };
 
   return (
-    <div className="card bg-auto shadow-lg p-6 mt-20 w-full">
-      <form onSubmit={handleSubmit} className="mt-6">
+    <div className="card bg-auto shadow-lg p-6 w-full">
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-wrap text-gray-500">
           <div className="w-full px-3 mb-6">
             <label className="block text-sm font-bold mb-2">Amount</label>
