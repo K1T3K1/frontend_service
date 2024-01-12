@@ -6,6 +6,7 @@ import TransactionForm from "./TransactionForm";
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const [editingTransaction, setEditingTransaction] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -47,6 +48,23 @@ const TransactionList = () => {
       }
     };
 
+    const fetchCompanies = async () => {
+      try {
+        const response = await fetch(
+            "https://api.shield-dev51.quest/companies"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setCompanies(data.companies);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+
+    }
+
+    fetchCompanies();
     fetchTransactions();
   }, []); // Empty dependency array to ensure the effect runs only once
 
@@ -161,7 +179,7 @@ const TransactionList = () => {
                 <th>Price Per Unit</th>
                 <th>Transaction Date</th>
                 <th>Transaction Type</th>
-                <th>Company ID</th>
+                <th>Company</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -173,7 +191,7 @@ const TransactionList = () => {
                   <td>{transaction.price_per_unit}</td>
                   <td>{transaction.transaction_date}</td>
                   <td>{transaction.transaction_type.toUpperCase()}</td>
-                  <td>{transaction.company_id}</td>
+                  <td>{companies.find(company => company.id === transaction.company_id)?.name}</td>
                   <td>
                     <button
                       onClick={() => handleDelete(transaction.id)}
