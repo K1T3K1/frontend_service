@@ -44,16 +44,16 @@ const SimulatorForm = ({ onSimulate }) => {
     console.log(selectedCompany, investmentVolume);
 
     if (selectedCompany && investmentVolume) {
-      setInvestmentsList([
+      const newInvestmentsList = [
         ...investmentsList,
         {
           company_symbol: selectedCompany,
           investment_volume: parseFloat(investmentVolume),
         },
-      ]);
-
-      // reset the form
-      setInvestmentVolume("");
+      ];
+      setInvestmentsList(newInvestmentsList); // update local state
+      onAddInvestment(newInvestmentsList); // update parent state
+      setInvestmentVolume(""); // reset the form
     }
   };
 

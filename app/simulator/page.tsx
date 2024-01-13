@@ -39,6 +39,10 @@ const SimulatorPage: React.FC<SimulatorPageProps> = () => {
         setInvestmentsList(updatedList);
     };
 
+    const handleAddInvestment = (newInvestmentsList) => {
+        setInvestmentsList(newInvestmentsList);
+    };
+
     return (
         <div className="simulator-page mt-20">
             <div className="header-with-lines mb-10">
@@ -49,6 +53,7 @@ const SimulatorPage: React.FC<SimulatorPageProps> = () => {
                     onSimulate={simulate}
                     investmentsList={investmentsList}
                     setInvestmentsList={setInvestmentsList}
+                    onAddInvestment={handleAddInvestment} // pass handleAddInvestment function as a prop
                 />
                 {investmentsList.length > 0 && (
                     <InvestmentsList
@@ -56,7 +61,7 @@ const SimulatorPage: React.FC<SimulatorPageProps> = () => {
                         onRemoveInvestment={handleRemoveInvestment}
                     />
                 )}
-                {simulationResult && <SimulatorResultTable result={simulationResult}/>}
+                {simulationResult && <SimulatorResultTable result={simulationResult} investmentsList={investmentsList}/>}
             </div>
         </div>
     );
