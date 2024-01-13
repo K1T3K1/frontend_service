@@ -51,7 +51,7 @@ const TransactionList = () => {
     const fetchCompanies = async () => {
       try {
         const response = await fetch(
-            "https://api.shield-dev51.quest/companies"
+          "https://api.shield-dev51.quest/companies"
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -61,8 +61,7 @@ const TransactionList = () => {
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
       }
-
-    }
+    };
 
     fetchCompanies();
     fetchTransactions();
@@ -115,10 +114,6 @@ const TransactionList = () => {
     setOpen(true);
   };
 
-  const handleCancelClick = () => {
-    setEditingTransaction(null);
-  };
-
   const handleUpdateTransaction = async (updatedTransaction) => {
     try {
       // Retrieve the access token from local storage
@@ -147,7 +142,6 @@ const TransactionList = () => {
         throw new Error("Network response was not ok");
       }
 
-      // Update UI after successful update
       setTransactions(
         transactions.map((transaction) => {
           if (transaction.id === updatedTransaction.id) {
@@ -158,8 +152,9 @@ const TransactionList = () => {
       );
       setEditingTransaction(null);
       setOpen(false);
+      toast.success("Transaction edited succesfully");
     } catch (error) {
-      // Handle errors here
+      toast.success("Failed to edit transaction");
       console.error("There was a problem with the fetch operation:", error);
     }
   };
@@ -191,7 +186,13 @@ const TransactionList = () => {
                   <td>{transaction.price_per_unit}</td>
                   <td>{transaction.transaction_date}</td>
                   <td>{transaction.transaction_type.toUpperCase()}</td>
-                  <td>{companies.find(company => company.id === transaction.company_id)?.name}</td>
+                  <td>
+                    {
+                      companies.find(
+                        (company) => company.id === transaction.company_id
+                      )?.name
+                    }
+                  </td>
                   <td>
                     <button
                       onClick={() => handleDelete(transaction.id)}
