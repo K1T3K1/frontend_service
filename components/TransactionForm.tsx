@@ -149,7 +149,7 @@ const TransactionForm = (props) => {
             <select
               onChange={handleCompanyChange}
               name="company"
-              className="text-gray-500 block border border-black-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              className="w-full text-gray-500 block border border-black-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             >
               {companies.map((company) => (
                 <option key={company.symbol} value={company.id}>
