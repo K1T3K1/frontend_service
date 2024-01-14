@@ -1,11 +1,10 @@
 // components/SimulatorForm.js
 import React, { useState, useEffect } from "react";
 
-const SimulatorForm = ({ onSimulate }) => {
+const SimulatorForm = ({ onSimulate, investmentsList, setInvestmentsList }) => {
   const [companies, setCompanies] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState("");
   const [investmentVolume, setInvestmentVolume] = useState("");
-  const [investmentsList, setInvestmentsList] = useState([]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -21,7 +20,6 @@ const SimulatorForm = ({ onSimulate }) => {
 
         // set selected company to the first company in the list
         setSelectedCompany(data.companies[0].symbol);
-
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
       }
@@ -39,7 +37,6 @@ const SimulatorForm = ({ onSimulate }) => {
   };
 
   const handleAddInvestment = () => {
-
     // print the selected company and investment volume
     console.log(selectedCompany, investmentVolume);
 
@@ -52,7 +49,6 @@ const SimulatorForm = ({ onSimulate }) => {
         },
       ];
       setInvestmentsList(newInvestmentsList); // update local state
-      onAddInvestment(newInvestmentsList); // update parent state
       setInvestmentVolume(""); // reset the form
     }
   };
@@ -112,7 +108,7 @@ const SimulatorForm = ({ onSimulate }) => {
       {investmentsList.length > 0 && (
         <div className="mt-6">
           <label className="block text-lg font-semibold text-gray-400 mb-1">
-            Simulation Results
+            Simulated investments
           </label>
           <table className="table-auto  border-collapse border border-gray-300">
             <thead className="bg-gray-200">

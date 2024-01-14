@@ -1,70 +1,56 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SimulatorForm from "@/components/SimulatorForm";
 import SimulatorResultTable from "@/components/SimulatorResult";
-import InvestmentsList from "@/components/InvestmentsList";
 
-interface SimulatorPageProps {
-}
+interface SimulatorPageProps {}
 
 const SimulatorPage: React.FC<SimulatorPageProps> = () => {
-    const [simulationResult, setSimulationResult] = useState(null);
-    const [investmentsList, setInvestmentsList] = useState([]);
+  const [simulationResult, setSimulationResult] = useState(null);
+  const [investmentsList, setInvestmentsList] = useState([]);
 
-    const simulate = async (requestData) => {
-        try {
-            const response = await fetch("https://api.shield-dev51.quest/simulator", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestData),
-            });
+  const simulate = async (requestData) => {
+    try {
+      const response = await fetch("https://api.shield-dev51.quest/simulator", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
 
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-            const result = await response.json();
-            setSimulationResult(result);
-        } catch (error) {
-            console.error("There was a problem with the fetch operation:", error);
-        }
-    };
+      const result = await response.json();
+      setSimulationResult(result);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
 
-    const handleRemoveInvestment = (index) => {
-        const updatedList = [...investmentsList];
-        updatedList.splice(index, 1);
-        setInvestmentsList(updatedList);
-    };
-
-    const handleAddInvestment = (newInvestmentsList) => {
-        setInvestmentsList(newInvestmentsList);
-    };
-
-    return (
-        <div className="simulator-page mt-20">
-            <div className="header-with-lines mb-10">
-                <h1 className="text-4xl font-bold">Stock Simulator</h1>
-            </div>
-            <div className="px-5">
-                <SimulatorForm
-                    onSimulate={simulate}
-                    investmentsList={investmentsList}
-                    setInvestmentsList={setInvestmentsList}
-                    onAddInvestment={handleAddInvestment} // pass handleAddInvestment function as a prop
-                />
-                {investmentsList.length > 0 && (
-                    <InvestmentsList
-                        investments={investmentsList}
-                        onRemoveInvestment={handleRemoveInvestment}
-                    />
-                )}
-                {simulationResult && <SimulatorResultTable result={simulationResult} investmentsList={investmentsList}/>}
-            </div>
-        </div>
-    );
+  return (
+    <div className="simulator-page mt-20">
+      <div className="header-with-lines mb-10">
+        <h1 className="text-4xl font-bold">Stock Simulator</h1>
+      </div>
+      <div className="px-5">
+        <SimulatorForm
+          onSimulate={simulate}
+          investmentsList={investmentsList}
+          setInvestmentsList={setInvestmentsList}
+        />
+        {simulationResult && (
+          <SimulatorResultTable
+            result={simulationResult}
+            investmentsList={investmentsList}
+          />
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default SimulatorPage;
